@@ -188,10 +188,7 @@ namespace HumaneSociety
 
         internal static Animal GetAnimalByID(int id)
         {
-            Animal animalSelection = new Animal();
-            animalSelection = db.Animals.Where(a => a.AnimalId == id).Single();
-
-            return animalSelection;
+            return db.Animals.Where(a => a.AnimalId == id).Single();
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
@@ -226,9 +223,7 @@ namespace HumaneSociety
 
         internal static Room GetRoom(int animalId)
         {
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            throw new NotImplementedException();
-            /////////////////////////////////////////////////////////////////////////////////////////////
+            return db.Rooms.Where(r => r.AnimalId == animalId).Single();
         }
 
         internal static int GetDietPlanId(string dietPlanName)
