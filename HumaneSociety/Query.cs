@@ -159,36 +159,39 @@ namespace HumaneSociety
             return employeeWithUserName == null;
         }
 
-
-        //// TODO Items: ////
-
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            throw new NotImplementedException();
-            /////////////////////////////////////////////////////////////////////////////////////////////
+            switch (crudOperation)
+            {
+                case "create":
+                    db.Employees.InsertOnSubmit(employee);
+                    db.SubmitChanges();
+                    break;
+                case "delete":
+                    db.Employees.DeleteOnSubmit(employee);
+                    db.SubmitChanges();
+                    break;
+                case "read":
+                    UserInterface.DisplayEmployeeInfo(employee);
+                    break;
+                case "update":
+
+                    Employee updatedEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).Single();
+                    updatedEmployee.FirstName = employee.FirstName;
+                    updatedEmployee.LastName = employee.LastName;
+                    updatedEmployee.UserName = employee.UserName;
+                    updatedEmployee.Password = employee.Password;
+                    updatedEmployee.Email = employee.Email;
+                    break;
+                default:
+                    break;
+            }
         }
 
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
-
-            //Animal newAnimal = new Animal();
-
-            //newAnimal.Name = animal.Name;
-            //newAnimal.Weight = animal.Weight;
-            //newAnimal.Age = animal.Age;
-            //newAnimal.Demeanor = animal.Demeanor;
-            //newAnimal.KidFriendly = animal.KidFriendly;
-            //newAnimal.PetFriendly = animal.PetFriendly;
-            //newAnimal.Gender = animal.Gender;
-            //newAnimal.AdoptionStatus = newAnimal.AdoptionStatus;
-            //newAnimal.CategoryId = animal.CategoryId;
-
-            //db.Animals.InsertOnSubmit(newAnimal);
-            //db.SubmitChanges();
-
             db.Animals.InsertOnSubmit(animal);
             db.SubmitChanges();
         }
@@ -233,21 +236,19 @@ namespace HumaneSociety
                         return;
                 }
             }
+            db.SubmitChanges();
         }
 
         internal static void RemoveAnimal(Animal animal)
         {
             db.Animals.DeleteOnSubmit(animal);
             db.SubmitChanges();
-            //db.Animals.Where(a => a.AnimalId == animal.AnimalId).Single();
         }
 
         // TODO: Animal Multi-Trait Search
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
-            /////////////////////////////////////////////////////////////////////////////////////////////
             throw new NotImplementedException();
-            /////////////////////////////////////////////////////////////////////////////////////////////
         }
 
         // TODO: Misc Animal Things
