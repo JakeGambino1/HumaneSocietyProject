@@ -173,17 +173,24 @@ namespace HumaneSociety
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
-            Animal newAnimal = new Animal();
 
-            newAnimal.Name = animal.Name;
-            newAnimal.Weight = animal.Weight;
-            newAnimal.Age = animal.Age;
-            newAnimal.Demeanor = animal.Demeanor;
-            newAnimal.KidFriendly = animal.KidFriendly;
-            newAnimal.PetFriendly = animal.PetFriendly;
-            newAnimal.Gender = animal.Gender;
-            newAnimal.AdoptionStatus = newAnimal.AdoptionStatus;
-            newAnimal.CategoryId = animal.CategoryId;
+            //Animal newAnimal = new Animal();
+
+            //newAnimal.Name = animal.Name;
+            //newAnimal.Weight = animal.Weight;
+            //newAnimal.Age = animal.Age;
+            //newAnimal.Demeanor = animal.Demeanor;
+            //newAnimal.KidFriendly = animal.KidFriendly;
+            //newAnimal.PetFriendly = animal.PetFriendly;
+            //newAnimal.Gender = animal.Gender;
+            //newAnimal.AdoptionStatus = newAnimal.AdoptionStatus;
+            //newAnimal.CategoryId = animal.CategoryId;
+
+            //db.Animals.InsertOnSubmit(newAnimal);
+            //db.SubmitChanges();
+
+            db.Animals.InsertOnSubmit(animal);
+            db.SubmitChanges();
         }
 
         internal static Animal GetAnimalByID(int id)
@@ -193,12 +200,37 @@ namespace HumaneSociety
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
         {
-            Animal animalUpdate = GetAnimalByID(animalId);
+            Animal animal = GetAnimalByID(animalId);
             foreach(KeyValuePair<int, string> entry in updates)
             {
-                switch (UserInterface.GetUserInput())
+                switch (entry.Key)
                 {
-                    
+                    case 1:
+                        animal.CategoryId = GetCategoryId(entry.Value);
+                        return;
+                    case 2:
+                        animal.Name = entry.Value;
+                        return;
+                    case 3:
+                        animal.Age = Convert.ToInt32(entry.Value);
+                        return;
+                    case 4:
+                        animal.Demeanor = entry.Value;
+                        return;
+                    case 5:
+                        animal.KidFriendly = Convert.ToBoolean(entry.Value);
+                        return;
+                    case 6:
+                        animal.PetFriendly = Convert.ToBoolean(entry.Value);
+                        return;
+                    case 7:
+                        animal.Weight = Convert.ToInt32(entry.Value);
+                        return;
+                    case 8:
+                        animal.AnimalId = Convert.ToInt32(entry.Value);
+                        return;
+                    default:
+                        return;
                 }
             }
         }
@@ -224,7 +256,6 @@ namespace HumaneSociety
             Category category = db.Categories.Where(c => c.Name == categoryName).Single();
             return category.CategoryId;
         }
-
         internal static Room GetRoom(int animalId)
         {
             return db.Rooms.Where(r => r.AnimalId == animalId).Single();
@@ -246,6 +277,7 @@ namespace HumaneSociety
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
+            // Check for animals that adoptionstatus = pending
             /////////////////////////////////////////////////////////////////////////////////////////////
             throw new NotImplementedException();
             /////////////////////////////////////////////////////////////////////////////////////////////
