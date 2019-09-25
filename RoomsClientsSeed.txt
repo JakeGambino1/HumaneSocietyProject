@@ -1,0 +1,17 @@
+SELECT * FROM Rooms
+INSERT INTO Rooms VALUES (1, null)
+INSERT INTO Rooms VALUES (2, null)
+INSERT INTO Rooms VALUES (3, null)
+INSERT INTO Rooms VALUES (4, null)
+INSERT INTO Rooms VALUES (5, null)
+INSERT INTO Rooms VALUES (6, null)
+INSERT INTO Rooms VALUES (7, null)
+INSERT INTO Rooms VALUES (8, null)
+INSERT INTO Rooms VALUES (9, null)
+INSERT INTO Rooms VALUES (10, null)
+SELECT * FROM clients
+INSERT INTO clients VALUES ('Pancho', 'Villa', 'PVilla', 'vivalarevolucion', null, 'longlivemexico@revolution.com')
+INSERT INTO clients VALUES ('Sharon', 'McDougal', 'SMcdougal', 'ilikeDogs', null, 'sharbear@aol.com')
+INSERT INTO clients VALUES ('Karen', 'Dowell', 'KDowell', 'FrenchiesAreTheBest', null, 'karbear@gmail.com')
+INSERT INTO clients VALUES ('Megan', 'Rosenthal', 'MRosenthal', 'catsaremastersofdarkarts', null, 'mrosenthal@yahoo.com')
+INSERT INTO clients VALUES ('John', 'Vaughn', 'JVaughn', 'hempvalleyowner', null, 'jvaughn@shonneys.com')
