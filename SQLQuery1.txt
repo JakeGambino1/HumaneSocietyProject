@@ -1,0 +1,19 @@
+SELECT * FROM Animals
+
+INSERT INTO Animals (Name, Weight, Age, Demeanor, KidFriendly, PetFriendly, Gender, AdoptionStatus, CategoryId, DietPlanId, EmployeeId)
+SELECT * FROM Animals
+SELECT 'Dorothy', 10, 13, 'Happy', 0, 0, 'f', 'available'
+INSERT INTO Employees VALUES('Jake', 'Gambino', 'JGambino', 'NotRealPassword', null, 'jake@isawesome.1337')
+INSERT INTO Employees VALUES('Charles', 'King', 'CKing', 'NotRealPassword', null, 'charles@isntawesome.scrub')
+SELECT * FROM Employees
+
+INSERT INTO Animals VALUES ('Dorothy', 10, 13, 'Happy', 0, 0, 'f', 'available',null, null, null)
+INSERT INTO Animals VALUES ('Dorothy', 10, 13, 'Happy', 0, 0, 'f', 'available',null, null, null)
+INSERT INTO Animals VALUES ('Dorothy', 10, 13, 'Happy', 0, 0, 'f', 'available',null, null, null)
+INSERT INTO Animals VALUES ('Dorothy', 10, 13, 'Happy', 0, 0, 'f', 'available',null, null, null)
+INSERT INTO Animals VALUES ('Dorothy', 10, 13, 'Happy', 0, 0, 'f', 'available',null, null, null)
+
+SELECT * FROM DietPlans
+INSERT INTO DietPlans VALUES('Big Carnivore', 'Meat', 10)
+INSERT INTO DietPlans VALUES('Vegetarian', 'vegetables', 6)
+INSERT INTO DietPlans VALUES('Vegan', 'natural', 8)
