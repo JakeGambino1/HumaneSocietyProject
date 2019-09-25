@@ -138,9 +138,7 @@ namespace HumaneSociety
 
             if (employeeFromDb == null)
             {
-                //////////////////////////////////////////////////////////////////////////////////////////////
                 throw new NullReferenceException();
-                /////////////////////////////////////////////////////////////////////////////////////////////
             }
             else
             {
@@ -175,9 +173,17 @@ namespace HumaneSociety
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            throw new NotImplementedException();
-            /////////////////////////////////////////////////////////////////////////////////////////////
+            Animal newAnimal = new Animal();
+
+            newAnimal.Name = animal.Name;
+            newAnimal.Weight = animal.Weight;
+            newAnimal.Age = animal.Age;
+            newAnimal.Demeanor = animal.Demeanor;
+            newAnimal.KidFriendly = animal.KidFriendly;
+            newAnimal.PetFriendly = animal.PetFriendly;
+            newAnimal.Gender = animal.Gender;
+            newAnimal.AdoptionStatus = newAnimal.AdoptionStatus;
+            newAnimal.CategoryId = animal.CategoryId;
         }
 
         internal static Animal GetAnimalByID(int id)
