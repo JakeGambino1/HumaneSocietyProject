@@ -193,9 +193,14 @@ namespace HumaneSociety
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
         {
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            throw new NotImplementedException();
-            /////////////////////////////////////////////////////////////////////////////////////////////
+            Animal animalUpdate = GetAnimalByID(animalId);
+            foreach(KeyValuePair<int, string> entry in updates)
+            {
+                switch (UserInterface.GetUserInput())
+                {
+                    
+                }
+            }
         }
 
         internal static void RemoveAnimal(Animal animal)
@@ -228,9 +233,8 @@ namespace HumaneSociety
 
         internal static int GetDietPlanId(string dietPlanName)
         {
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            throw new NotImplementedException();
-            /////////////////////////////////////////////////////////////////////////////////////////////
+            DietPlan dietPlan = db.DietPlans.Where(d => d.Name == dietPlanName).Single();
+            return dietPlan.DietPlanId;
         }
 
         // TODO: Adoption CRUD Operations
@@ -274,7 +278,7 @@ namespace HumaneSociety
         {
             /////////////////////////////////////////////////////////////////////////////////////////////
             throw new NotImplementedException();
-                /////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////////////
         }
     }
 }
