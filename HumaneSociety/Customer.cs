@@ -93,7 +93,7 @@ namespace HumaneSociety
         {
             Console.Clear();
             var updates = UserInterface.GetAnimalSearchCriteria();
-            var animals = Query.SearchForAnimalsByMultipleTraits(updates).ToList().DefaultIfEmpty();
+            var animals = Query.SearchForAnimalsByMultipleTraits(updates).ToList();
 
             if (animals.Count > 1)
             {
@@ -267,16 +267,16 @@ namespace HumaneSociety
             int input = default(int);
             while (input != 9)
             {
-                try
-                {
+                //try
+                //{
                     UserInterface.DisplayUserOptions(options);
                     input = int.Parse(UserInterface.GetUserInput());
                     RunUpdateInput(input);
-                }
-                catch
-                {
-                    UserInterface.DisplayUserOptions("Input not recognized please enter an integer number of the option you would like to update");
-                }
+               // }
+                //catch
+               // {
+                  //  UserInterface.DisplayUserOptions("Input not recognized please enter an integer number of the option you would like to update");
+                //}
             }
 
         }

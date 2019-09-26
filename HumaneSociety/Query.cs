@@ -93,12 +93,12 @@ namespace HumaneSociety
             clientFromDb.UserName = clientWithUpdates.UserName;
             clientFromDb.Password = clientWithUpdates.Password;
             clientFromDb.Email = clientWithUpdates.Email;
-
+            
             // get address object from clientWithUpdates
             Address clientAddress = clientWithUpdates.Address;
-
+           
             // look for existing Address in Db (null will be returned if the address isn't already in the Db
-            Address updatedAddress = db.Addresses.Where(a => a.AddressLine1 == clientAddress.AddressLine1 && a.USStateId == clientAddress.USStateId && a.Zipcode == clientAddress.Zipcode).FirstOrDefault();
+            Address updatedAddress = db.Addresses.Where(a => a.AddressLine1 == clientAddress.AddressLine1 && a.USStateId == clientAddress.USStateId && a.Zipcode == clientAddress.Zipcode).SingleOrDefault();
 
             // if the address isn't found in the Db, create and insert it
             if(updatedAddress == null)
@@ -241,7 +241,7 @@ namespace HumaneSociety
         }
 
         internal static void RemoveAnimal(Animal animal)
-        {
+        { 
             db.Animals.DeleteOnSubmit(animal);
             db.SubmitChanges();
         }
@@ -255,28 +255,28 @@ namespace HumaneSociety
                 switch (entry.Key)
                 {
                     case 1:
-                        animalSearchList = animalSearchList.Where(a => a.CategoryId == GetCategoryId(entry.Value)).DefaultIfEmpty();
+                        animalSearchList = animalSearchList.Where(a => a.CategoryId == GetCategoryId(entry.Value));
                         break;
                     case 2:
-                        animalSearchList = animalSearchList.Where(a => a.Name == entry.Value).DefaultIfEmpty();
+                        animalSearchList = animalSearchList.Where(a => a.Name == entry.Value);
                         break;
                     case 3:
-                        animalSearchList = animalSearchList.Where(a => a.Age == Convert.ToInt32(entry.Value)).DefaultIfEmpty();
+                        animalSearchList = animalSearchList.Where(a => a.Age == Convert.ToInt32(entry.Value));
                         break;
                     case 4:
-                        animalSearchList = animalSearchList.Where(a => a.Demeanor == entry.Value).DefaultIfEmpty();
+                        animalSearchList = animalSearchList.Where(a => a.Demeanor == entry.Value);
                         break;
                     case 5:
-                        animalSearchList = animalSearchList.Where(a => a.KidFriendly == Convert.ToBoolean(entry.Value)).DefaultIfEmpty();
+                        animalSearchList = animalSearchList.Where(a => a.KidFriendly == Convert.ToBoolean(entry.Value));
                         break;
                     case 6:
-                        animalSearchList = animalSearchList.Where(a => a.PetFriendly == Convert.ToBoolean(entry.Value)).DefaultIfEmpty();
+                        animalSearchList = animalSearchList.Where(a => a.PetFriendly == Convert.ToBoolean(entry.Value));
                         break;
                     case 7:
-                        animalSearchList = animalSearchList.Where(a => a.Weight == Convert.ToInt32(entry.Value)).DefaultIfEmpty();
+                        animalSearchList = animalSearchList.Where(a => a.Weight == Convert.ToInt32(entry.Value));
                         break;
                     case 8:
-                        animalSearchList = animalSearchList.Where(a => a.AnimalId == Convert.ToInt32(entry.Value)).DefaultIfEmpty();
+                        animalSearchList = animalSearchList.Where(a => a.AnimalId == Convert.ToInt32(entry.Value));
                         break;
                 }
             }
@@ -286,8 +286,7 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-            Category category = db.Categories.Where(c => c.Name == categoryName).SingleOrDefault();
-            return category.CategoryId;
+            return db.Categories.Where(c => c.Name == categoryName).SingleOrDefault().CategoryId;
         }
         internal static Room GetRoom(int animalId)
         {
@@ -296,8 +295,7 @@ namespace HumaneSociety
 
         internal static int GetDietPlanId(string dietPlanName)
         {
-            DietPlan dietPlan = db.DietPlans.Where(d => d.Name == dietPlanName).SingleOrDefault();
-            return dietPlan.DietPlanId;
+            return db.DietPlans.Where(d => d.Name == dietPlanName).SingleOrDefault().DietPlanId;
         }
 
         // TODO: Adoption CRUD Operations
@@ -314,7 +312,6 @@ namespace HumaneSociety
         
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            // Check for animals that adoptionstatus = pending
             return db.Adoptions.Where(a => a.ApprovalStatus == "pending");
         }
 
