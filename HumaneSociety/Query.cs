@@ -322,14 +322,11 @@ namespace HumaneSociety
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-            
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            throw new NotImplementedException();
-            /////////////////////////////////////////////////////////////////////////////////////////////
+            
         }
 
         // TODO: Shots Stuff
