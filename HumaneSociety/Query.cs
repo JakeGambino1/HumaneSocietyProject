@@ -236,6 +236,7 @@ namespace HumaneSociety
                         return;
                 }
             }
+            db.Animals.InsertOnSubmit(animal);
             db.SubmitChanges();
         }
 
@@ -280,7 +281,6 @@ namespace HumaneSociety
                 }
             }
             return animalSearchList;
-
         }
 
         // TODO: Misc Animal Things
@@ -333,7 +333,7 @@ namespace HumaneSociety
         // TODO: Shots Stuff
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
-            return db.AnimalShots.Where(ashot => ashot.AnimalId == animal.AnimalId).DefaultIfEmpty();
+            return db.AnimalShots.Where(ashot => ashot.AnimalId == animal.AnimalId);
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
@@ -341,7 +341,9 @@ namespace HumaneSociety
             AnimalShot newShot = new AnimalShot();
             newShot.AnimalId = animal.AnimalId;
             newShot.ShotId = db.Shots.Where(s => s.Name == shotName).Select(s => s.ShotId).SingleOrDefault();
+            newShot.DateReceived = DateTime.Now;
 
+            db.AnimalShots.InsertOnSubmit(newShot);
             db.SubmitChanges();
         }
     }
