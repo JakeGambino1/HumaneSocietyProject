@@ -182,6 +182,7 @@ namespace HumaneSociety
                     updatedEmployee.UserName = employee.UserName;
                     updatedEmployee.Password = employee.Password;
                     updatedEmployee.Email = employee.Email;
+                    db.SubmitChanges();
                     break;
                 default:
                     break;
@@ -332,16 +333,16 @@ namespace HumaneSociety
         // TODO: Shots Stuff
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            throw new NotImplementedException();
-            /////////////////////////////////////////////////////////////////////////////////////////////
+            return db.AnimalShots.Where(ashot => ashot.AnimalId == animal.AnimalId).DefaultIfEmpty();
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            throw new NotImplementedException();
-            /////////////////////////////////////////////////////////////////////////////////////////////
+            AnimalShot newShot = new AnimalShot();
+            newShot.AnimalId = animal.AnimalId;
+            newShot.ShotId = db.Shots.Where(s => s.Name == shotName).Select(s => s.ShotId).SingleOrDefault();
+
+            db.SubmitChanges();
         }
     }
 }
