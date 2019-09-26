@@ -176,13 +176,13 @@ namespace HumaneSociety
                     UserInterface.DisplayEmployeeInfo(employee);
                     break;
                 case "update":
-
                     Employee updatedEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).Single();
                     updatedEmployee.FirstName = employee.FirstName;
                     updatedEmployee.LastName = employee.LastName;
                     updatedEmployee.UserName = employee.UserName;
                     updatedEmployee.Password = employee.Password;
                     updatedEmployee.Email = employee.Email;
+                    db.SubmitChanges();
                     break;
                 default:
                     break;
@@ -236,6 +236,7 @@ namespace HumaneSociety
                         return;
                 }
             }
+            db.Animals.InsertOnSubmit(animal);
             db.SubmitChanges();
         }
 
@@ -248,7 +249,38 @@ namespace HumaneSociety
         // TODO: Animal Multi-Trait Search
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
-            throw new NotImplementedException();
+            IQueryable<Animal> animalSearchList = db.Animals;
+            foreach (KeyValuePair<int, string> entry in updates)
+            {
+                switch (entry.Key)
+                {
+                    case 1:
+                        animalSearchList = animalSearchList.Where(a => a.CategoryId == GetCategoryId(entry.Value));
+                        break;
+                    case 2:
+                        animalSearchList = animalSearchList.Where(a => a.Name == entry.Value);
+                        break;
+                    case 3:
+                        animalSearchList = animalSearchList.Where(a => a.Age == Convert.ToInt32(entry.Value));
+                        break;
+                    case 4:
+                        animalSearchList = animalSearchList.Where(a => a.Demeanor == entry.Value);
+                        break;
+                    case 5:
+                        animalSearchList = animalSearchList.Where(a => a.KidFriendly == Convert.ToBoolean(entry.Value));
+                        break;
+                    case 6:
+                        animalSearchList = animalSearchList.Where(a => a.PetFriendly == Convert.ToBoolean(entry.Value));
+                        break;
+                    case 7:
+                        animalSearchList = animalSearchList.Where(a => a.Weight == Convert.ToInt32(entry.Value));
+                        break;
+                    case 8:
+                        animalSearchList = animalSearchList.Where(a => a.AnimalId == Convert.ToInt32(entry.Value));
+                        break;
+                }
+            }
+            return animalSearchList;
         }
 
         // TODO: Misc Animal Things
@@ -285,7 +317,7 @@ namespace HumaneSociety
             // Check for animals that adoptionstatus = pending
             /////////////////////////////////////////////////////////////////////////////////////////////
             throw new NotImplementedException();
-            /////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////// 
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
@@ -303,16 +335,18 @@ namespace HumaneSociety
         // TODO: Shots Stuff
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            throw new NotImplementedException();
-            /////////////////////////////////////////////////////////////////////////////////////////////
+            return db.AnimalShots.Where(ashot => ashot.AnimalId == animal.AnimalId);
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            throw new NotImplementedException();
-            /////////////////////////////////////////////////////////////////////////////////////////////
+            AnimalShot newShot = new AnimalShot();
+            newShot.AnimalId = animal.AnimalId;
+            newShot.ShotId = db.Shots.Where(s => s.Name == shotName).Select(s => s.ShotId).SingleOrDefault();
+            newShot.DateReceived = DateTime.Now;
+
+            db.AnimalShots.InsertOnSubmit(newShot);
+            db.SubmitChanges();
         }
     }
 }
