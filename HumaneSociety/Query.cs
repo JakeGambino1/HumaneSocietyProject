@@ -176,7 +176,6 @@ namespace HumaneSociety
                     UserInterface.DisplayEmployeeInfo(employee);
                     break;
                 case "update":
-
                     Employee updatedEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).Single();
                     updatedEmployee.FirstName = employee.FirstName;
                     updatedEmployee.LastName = employee.LastName;
@@ -248,7 +247,9 @@ namespace HumaneSociety
         // TODO: Animal Multi-Trait Search
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
+            /////////////////////////////////////////////////////
             throw new NotImplementedException();
+            /////////////////////////////////////////////////////
         }
 
         // TODO: Misc Animal Things
@@ -281,7 +282,7 @@ namespace HumaneSociety
             // Check for animals that adoptionstatus = pending
             /////////////////////////////////////////////////////////////////////////////////////////////
             throw new NotImplementedException();
-            /////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////// 
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
