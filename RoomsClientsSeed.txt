@@ -15,3 +15,27 @@ INSERT INTO clients VALUES ('Sharon', 'McDougal', 'SMcdougal', 'ilikeDogs', null
 INSERT INTO clients VALUES ('Karen', 'Dowell', 'KDowell', 'FrenchiesAreTheBest', null, 'karbear@gmail.com')
 INSERT INTO clients VALUES ('Megan', 'Rosenthal', 'MRosenthal', 'catsaremastersofdarkarts', null, 'mrosenthal@yahoo.com')
 INSERT INTO clients VALUES ('John', 'Vaughn', 'JVaughn', 'hempvalleyowner', null, 'jvaughn@shonneys.com')
+//Linking Animals to RoomID
+UPDATE Rooms SET AnimalId = 6
+WHERE RoomId = 1
+UPDATE Rooms SET AnimalId = 7
+WHERE RoomId = 2
+UPDATE Rooms SET AnimalId = 8
+WHERE RoomId = 3
+UPDATE Rooms SET AnimalId = 9
+WHERE RoomId = 4
+UPDATE Rooms SET AnimalId = 10
+WHERE RoomId = 5
+SELECT * FROM Employees
+UPDATE Employees SET EmployeeNumber = 1337
+WHERE EmployeeId = 1
+UPDATE Employees SET EmployeeNumber = 9049
+WHERE EmployeeId = 2
+UPDATE Employees SET EmployeeNumber = 1234
+WHERE EmployeeId = 3
+UPDATE Employees SET EmployeeNumber = 2345
+WHERE EmployeeId = 4
+UPDATE Employees SET EmployeeNumber = 3456
+WHERE EmployeeId = 5
+UPDATE Employees SET EmployeeNumber = 4567
+WHERE EmployeeId = 6
