@@ -93,12 +93,12 @@ namespace HumaneSociety
             clientFromDb.UserName = clientWithUpdates.UserName;
             clientFromDb.Password = clientWithUpdates.Password;
             clientFromDb.Email = clientWithUpdates.Email;
-
+            
             // get address object from clientWithUpdates
             Address clientAddress = clientWithUpdates.Address;
-
+           
             // look for existing Address in Db (null will be returned if the address isn't already in the Db
-            Address updatedAddress = db.Addresses.Where(a => a.AddressLine1 == clientAddress.AddressLine1 && a.USStateId == clientAddress.USStateId && a.Zipcode == clientAddress.Zipcode).FirstOrDefault();
+            Address updatedAddress = db.Addresses.Where(a => a.AddressLine1 == clientAddress.AddressLine1 && a.USStateId == clientAddress.USStateId && a.Zipcode == clientAddress.Zipcode).SingleOrDefault();
 
             // if the address isn't found in the Db, create and insert it
             if(updatedAddress == null)
@@ -198,7 +198,7 @@ namespace HumaneSociety
 
         internal static Animal GetAnimalByID(int id)
         {
-            return db.Animals.Where(a => a.AnimalId == id).Single();
+            return db.Animals.Where(a => a.AnimalId == id).SingleOrDefault();
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
@@ -242,6 +242,14 @@ namespace HumaneSociety
 
         internal static void RemoveAnimal(Animal animal)
         {
+            Room animalRoom = db.Rooms.Where(r => r.AnimalId == animal.AnimalId).SingleOrDefault();
+            db.Rooms.DeleteOnSubmit(animalRoom);
+            foreach(AnimalShot shot in db.AnimalShots)
+            {
+                AnimalShot animalShots = db.AnimalShots.Where(ashot => ashot.AnimalId == animal.AnimalId).FirstOrDefault();
+                db.AnimalShots.DeleteOnSubmit(animalShots);
+                db.SubmitChanges();
+            }
             db.Animals.DeleteOnSubmit(animal);
             db.SubmitChanges();
         }
@@ -286,18 +294,17 @@ namespace HumaneSociety
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string categoryName)
         {
-            Category category = db.Categories.Where(c => c.Name == categoryName).Single();
-            return category.CategoryId;
+            return db.Categories.Where(c => c.Name == categoryName).SingleOrDefault().CategoryId;
         }
+
         internal static Room GetRoom(int animalId)
         {
-            return db.Rooms.Where(r => r.AnimalId == animalId).Single();
+            return db.Rooms.Where(r => r.AnimalId == animalId).SingleOrDefault();
         }
 
         internal static int GetDietPlanId(string dietPlanName)
         {
-            DietPlan dietPlan = db.DietPlans.Where(d => d.Name == dietPlanName).Single();
-            return dietPlan.DietPlanId;
+            return db.DietPlans.Where(d => d.Name == dietPlanName).SingleOrDefault().DietPlanId;
         }
 
         // TODO: Adoption CRUD Operations
@@ -311,20 +318,16 @@ namespace HumaneSociety
             db.Adoptions.InsertOnSubmit(adoption);
             db.SubmitChanges();
         }
-
+        
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            // Check for animals that adoptionstatus = pending
-            /////////////////////////////////////////////////////////////////////////////////////////////
-            throw new NotImplementedException();
-            ///////////////////////////////////////////////////////////////////////////////////////////// 
+            return db.Adoptions.Where(a => a.ApprovalStatus == "pending");
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
             if(isAdopted)
             {
-                
                 adoption.ApprovalStatus = "Approved";
                 RemoveAdoption(adoption.AnimalId, adoption.ClientId, adoption);
             }
@@ -332,8 +335,8 @@ namespace HumaneSociety
 
         internal static void RemoveAdoption(int animalId, int clientId, Adoption adoption)
         {
-            db.Adoptions.DeleteOnSubmit(adoption);
             GetAnimalByID(animalId).AdoptionStatus = "Adopted";
+            db.Adoptions.DeleteOnSubmit(adoption);
             db.SubmitChanges();
         }
 
