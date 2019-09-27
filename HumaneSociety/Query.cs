@@ -241,7 +241,15 @@ namespace HumaneSociety
         }
 
         internal static void RemoveAnimal(Animal animal)
-        { 
+        {
+            Room animalRoom = db.Rooms.Where(r => r.AnimalId == animal.AnimalId).SingleOrDefault();
+            db.Rooms.DeleteOnSubmit(animalRoom);
+            foreach(AnimalShot shot in db.AnimalShots)
+            {
+                AnimalShot animalShots = db.AnimalShots.Where(ashot => ashot.AnimalId == animal.AnimalId).FirstOrDefault();
+                db.AnimalShots.DeleteOnSubmit(animalShots);
+                db.SubmitChanges();
+            }
             db.Animals.DeleteOnSubmit(animal);
             db.SubmitChanges();
         }
@@ -288,6 +296,7 @@ namespace HumaneSociety
         {
             return db.Categories.Where(c => c.Name == categoryName).SingleOrDefault().CategoryId;
         }
+
         internal static Room GetRoom(int animalId)
         {
             return db.Rooms.Where(r => r.AnimalId == animalId).SingleOrDefault();
