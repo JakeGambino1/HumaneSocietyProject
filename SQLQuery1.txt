@@ -1,19 +1,76 @@
-SELECT * FROM Animals
 
-INSERT INTO Animals (Name, Weight, Age, Demeanor, KidFriendly, PetFriendly, Gender, AdoptionStatus, CategoryId, DietPlanId, EmployeeId)
-SELECT * FROM Animals
-SELECT 'Dorothy', 10, 13, 'Happy', 0, 0, 'f', 'available'
 INSERT INTO Employees VALUES('Jake', 'Gambino', 'JGambino', 'NotRealPassword', null, 'jake@isawesome.1337')
 INSERT INTO Employees VALUES('Charles', 'King', 'CKing', 'NotRealPassword', null, 'charles@isntawesome.scrub')
-SELECT * FROM Employees
+INSERT INTO Employees VALUES('Greg', 'Manthey', 'GManthey', 'TotesRealPassword', null, 'greg@thinkshesawesome.scrub')
+INSERT INTO Employees VALUES('Andrew', 'Malkasian', 'AMalkasian', 'TotesBadPassword', null, 'andrew@loveshisfam.ily')
+INSERT INTO Employees VALUES('Hannah', 'Bingham', 'HBingham', 'NotBadPassword', null, 'hannah@stealsthecouch.mean')
+INSERT INTO Employees VALUES('Ryan', 'Felicilda', 'RFelicilda', 'RyanPassword', null, 'ryan@leavesearlydaily.forreal')
 
-INSERT INTO Animals VALUES ('Dorothy', 10, 13, 'Happy', 0, 0, 'f', 'available',null, null, null)
-INSERT INTO Animals VALUES ('Dorothy', 10, 13, 'Happy', 0, 0, 'f', 'available',null, null, null)
-INSERT INTO Animals VALUES ('Dorothy', 10, 13, 'Happy', 0, 0, 'f', 'available',null, null, null)
-INSERT INTO Animals VALUES ('Dorothy', 10, 13, 'Happy', 0, 0, 'f', 'available',null, null, null)
-INSERT INTO Animals VALUES ('Dorothy', 10, 13, 'Happy', 0, 0, 'f', 'available',null, null, null)
-
-SELECT * FROM DietPlans
 INSERT INTO DietPlans VALUES('Big Carnivore', 'Meat', 10)
 INSERT INTO DietPlans VALUES('Vegetarian', 'vegetables', 6)
 INSERT INTO DietPlans VALUES('Vegan', 'natural', 8)
+INSERT INTO DietPlans VALUES('Paleo', 'caveman', 3)
+INSERT INTO DietPlans VALUES('Keto', 'native', 5)
+
+INSERT INTO Categories VALUES('cat')
+INSERT INTO Categories VALUES('dog')
+INSERT INTO Categories VALUES('bird')
+INSERT INTO Categories VALUES('rodent')
+INSERT INTO Categories VALUES('fish')
+
+INSERT INTO Animals VALUES ('Dorothy', 10, 13, 'Happy', 0, 0, 'f', 'available', 1, 5, null)
+INSERT INTO Animals VALUES ('Uma', 10, 2, 'Criminal', 1, 0, 'f', 'available', 2, 4, null)
+INSERT INTO Animals VALUES ('Billy', 10, 1, 'Mean', 1, 1, 'm', 'available', 3, 3, null)
+INSERT INTO Animals VALUES ('Radament', 10, 3, 'Happy', 0, 1, 'f', 'available', 4, 1, null)
+INSERT INTO Animals VALUES ('Freddie', 100, 45, 'Shy', 1, 1, 'm', 'available', 5, 2, null)
+
+
+INSERT INTO Addresses VALUES ('308 Road One', 'CityOne', 49, 53128)
+INSERT INTO Addresses VALUES ('123 Road Two', 'City Two', 49, 53128)
+INSERT INTO Addresses VALUES ('123 Road Three', 'City Three', 49, 53128)
+INSERT INTO Addresses VALUES ('123 Road Four', 'City Four', 49, 53128)
+INSERT INTO Addresses VALUES ('123 Road Five', 'City Five', 49, 53128)
+
+INSERT INTO Clients VALUES('Client First', 'Client LastName', 'Cl1UN', 'Cl1PW', 1, 'clientone@first.com')
+INSERT INTO Clients VALUES('Client2First', 'Client2LastName', 'Cl2UN', 'Cl2PW', 2, 'clienttwo@second.com')
+INSERT INTO Clients VALUES('Client3First', 'Client3LastName', 'Cl3UN', 'Cl3PW', 3, 'clientthree@third.com')
+INSERT INTO Clients VALUES('Client4First', 'Client4LastName', 'Cl4UN', 'Cl4PW', 4, 'clientfour@fourth.com')
+INSERT INTO Clients VALUES('Client5First', 'Client5LastName', 'Cl5UN', 'Cl5PW', 5, 'clientfive@fifth.com')
+
+
+INSERT INTO Rooms VALUES (1, null)
+INSERT INTO Rooms VALUES (2, null)
+INSERT INTO Rooms VALUES (3, null)
+INSERT INTO Rooms VALUES (4, null)
+INSERT INTO Rooms VALUES (5, null)
+INSERT INTO Rooms VALUES (6, null)
+INSERT INTO Rooms VALUES (7, null)
+INSERT INTO Rooms VALUES (8, null)
+INSERT INTO Rooms VALUES (9, null)
+INSERT INTO Rooms VALUES (10, null)
+
+
+UPDATE Rooms SET AnimalId = 1
+WHERE RoomId = 1
+UPDATE Rooms SET AnimalId = 2
+WHERE RoomId = 2
+UPDATE Rooms SET AnimalId = 3
+WHERE RoomId = 3
+UPDATE Rooms SET AnimalId = 4
+WHERE RoomId = 4
+UPDATE Rooms SET AnimalId = 5
+WHERE RoomId = 5
+
+UPDATE Employees SET EmployeeNumber = 1337
+WHERE EmployeeId = 1
+UPDATE Employees SET EmployeeNumber = 9049
+WHERE EmployeeId = 2
+UPDATE Employees SET EmployeeNumber = 1234
+WHERE EmployeeId = 3
+UPDATE Employees SET EmployeeNumber = 2345
+WHERE EmployeeId = 4
+UPDATE Employees SET EmployeeNumber = 3456
+WHERE EmployeeId = 5
+UPDATE Employees SET EmployeeNumber = 4567
+WHERE EmployeeId = 6
+
